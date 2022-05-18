@@ -1,8 +1,12 @@
+using TheDailyThree.Data_Access;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<IEntryRepository, EntryRepository>();
+builder.Services.AddTransient<IMoodRepository, MoodRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

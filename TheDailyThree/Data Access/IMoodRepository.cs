@@ -1,6 +1,11 @@
-﻿namespace TheDailyThree.Data_Access
+﻿using TheDailyThree.Models;
+
+namespace TheDailyThree.Data_Access
 {
-    public class IMoodRepository
+    public interface IMoodRepository
     {
+        List<Mood> GetAllMoods();
+        Mood GetMoodById(int id);
+        List<Mood> GetAllMoodsOfAUser(int userId);
     }
 }

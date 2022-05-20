@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const dbURL = "https://localhost:7115/api";
+const dbURL = "https://localhost:7074/api";
 
 const getAllUserEntries = (userId) =>
   new Promise((resolve, reject) => {
@@ -28,7 +28,9 @@ const deleteEntry = (entryId, userId) =>
 
 const addNewEntry = (entryObj) =>
   new Promise((resolve, reject) => {
-    axios.post(`${dbURL}/entries`, entryObj).then(resolve).catch(reject);
+    axios.post(`${dbURL}/entries`, entryObj)
+    .then(resolve)
+    .catch(reject);
   });
 
 export { getAllUserEntries, getSingleEntry, deleteEntry, addNewEntry };

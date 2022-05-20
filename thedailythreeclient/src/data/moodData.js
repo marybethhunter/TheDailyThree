@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const dbURL = "https://localhost:7115/api";
+const dbURL = "https://localhost:7074/api";
 
 const getAllMoods = () =>
   new Promise((resolve, reject) => {

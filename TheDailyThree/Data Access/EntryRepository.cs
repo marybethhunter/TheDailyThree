@@ -28,7 +28,7 @@ namespace TheDailyThree.Data_Access
                 Entry entry = new Entry()
                 {
                     Id = _reader.GetInt32(_reader.GetOrdinal("Id")),
-                    Date = _reader.GetDateTime(_reader.GetOrdinal("Date")),
+                    Date = _reader.GetString(_reader.GetOrdinal("Date")),
                     Thing1 = _reader.GetString(_reader.GetOrdinal("Thing1")),
                     Thing2 = _reader.GetString(_reader.GetOrdinal("Thing2")),
                     Thing3 = _reader.GetString(_reader.GetOrdinal("Thing3")),

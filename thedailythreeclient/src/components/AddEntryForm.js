@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { addNewEntry } from '../data/entryData';
-
-//TODO: add mood
+import { getAllMoods } from '../data/moodData';
 
 const initialState = {
   thing1: '',
@@ -18,7 +17,23 @@ const initialState = {
 
 export default function AddEntryForm() {
   const [formInput, setFormInput] = useState(initialState);
+  const [moods, setMoods] = useState([]);
+  const [mood, setMood] = useState([]);
   const navigate = useNavigate();
+
+  const handleChecked = (e) => {
+    const { name, checked } = e.target;
+    setFormInput(prevState => ({
+      ...prevState,
+      [name]: checked,
+    }));
+    if (e.target.checked === true) {
+      const checkedMood = moods.find((mood) => mood.id === parseInt(e.target.id),
+      );
+      mood.push(checkedMood);
+      setMood(mood);
+    }
+  };
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({
@@ -27,10 +42,24 @@ export default function AddEntryForm() {
     }));
   };
 
+  const getMoodId = (data) => {
+    for (let key of Object.values(data)){
+      return key;
+    }
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
-    addNewEntry({ ...formInput, date: new Date().toDateString(), userId: 1, moodId: 3 }).then(navigate('/'));
+    const moodChosen = getMoodId(mood);
+    addNewEntry({ ...formInput, date: new Date().toDateString(), userId: 1, moodId: moodChosen.id }).then(navigate('/home'));
   };
+
+  useEffect(() => {
+    let isMounted = true;
+    getAllMoods().then((moodArray) => {
+      if (isMounted) setMoods(moodArray);
+    });
+  }, [])
 
   return (
     <>
@@ -74,6 +103,17 @@ export default function AddEntryForm() {
             name="comment"
             id="comment"
           />
+        </FormGroup>
+        <FormGroup tag="fieldset">
+        <legend>How are you feeling today?</legend>
+        {moods.map((mood) => (
+          <FormGroup key={mood.id} check>
+            <Label check for={`${mood.id}`}>
+              <Input type="radio" name={`${mood.id}`} id={`${mood.id}`} onChange={(e) => handleChecked(e)} value={`${mood.id}`} />{' '}
+              {mood.name}
+            </Label>
+          </FormGroup>
+        ))}
         </FormGroup>
         <Button type="submit">Submit</Button>
       </Form>

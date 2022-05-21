@@ -10,7 +10,9 @@ const NavContainer = styled.div`
   top: 0px;
   height: 100vh;
   border-right: 2px solid black;
-`;
+  background-color: #b2b1bf;
+  opacity: 0.55;
+`
 
 const NavContent = styled.div`
   display: flex;

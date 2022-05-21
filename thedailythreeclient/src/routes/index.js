@@ -9,7 +9,7 @@ import EntryDetails from "../views/EntryDetails";
 export default function Routing() {
   return (
     <Routes>
-      <Route exact path="/" element={<Home />} />
+      <Route exact path="/home" element={<Home />} />
       <Route exact path="/signin" element={<SignIn />} />
       <Route exact path="/moodtracker" element={<MoodTracker />} />
       <Route exact path="/addentry" element={<AddEntry />} />

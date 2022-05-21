@@ -1,23 +1,49 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { deleteEntry, getSingleEntry } from "../data/entryData";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { getSingleMood } from "../data/moodData";
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+`;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: left;
+  background-color: #b2b1bf;
+  opacity: 0.76;
+  width: 600px;
+  margin-top: 15px;
+  border-radius: 75px;
+  padding: 50px;
+`;
+
+const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
 `;
 
 export default function EntryDetails() {
   const [entry, setEntry] = useState({});
+  const [mood, setMood] = useState({});
   const { entryKey } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
-      getSingleEntry(entryKey).then(setEntry);
+      getSingleEntry(entryKey).then((res) => {
+        setEntry(res);
+        getSingleMood(res.moodId).then(setMood);
+      });
     }
     return () => {
       isMounted = false;
@@ -25,23 +51,49 @@ export default function EntryDetails() {
   }, []);
 
   return (
-    <Wrapper>
-      <h2>Date: {entry.date}</h2>
-      <h2>Gratitude 1: {entry.thing1}</h2>
-      <h2>Gratitude 2: {entry.thing2}</h2>
-      <h2>Gratitude 3: {entry.thing3}</h2>
-      <h2>Comments: {entry.thing3}</h2>
-      <h2>Mood Id: {entry.moodId}</h2>
-      <button
-        onClick={() => {
-          deleteEntry(entry.id, entry.userId);
-          navigate("/home");
-        }}
-      >
-        Delete Entry
-      </button>
-      <button onClick={() => navigate("/home")}>Go Back</button>
-    </Wrapper>
+    <Container>
+      <Wrapper>
+        <h4>Entry Date: {entry.date}</h4>
+        <h4>What you were grateful for:</h4>
+        <ul>
+          <li>{entry.thing1}</li>
+          <li>{entry.thing2}</li>
+          <li>{entry.thing3}</li>
+        </ul>
+        <h4>Comments: {entry.comment}</h4>
+        <h4>Mood: {mood.name}</h4>
+        <LinkWrapper>
+          <Link
+          onClick={() => deleteEntry(entry.id, entry.userId)}
+          to="/home"
+          >
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path fill="none" d="M0 0h24v24H0z" />
+                <path d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8zm2 2v10h12V10H6zm3 2h2v6H9v-6zm4 0h2v6h-2v-6zM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5zm2-1v1h6V4H9z" />
+              </g>
+            </svg>
+          </Link>
+          <Link to="/home">
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 512 512"
+              data-name="Layer 1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M413,99a221.83,221.83,0,0,0-313-.76V49H70v105H175V124h-58.4A191.8,191.8,0,0,1,256,63.92c105.91,0,192.08,86.17,192.08,192.08S361.91,448.08,256,448.08,63.92,361.91,63.92,256H34A222,222,0,0,0,413,413a222,222,0,0,0,0-314Z" />
+            </svg>
+          </Link>
+        </LinkWrapper>
+      </Wrapper>
+    </Container>
   );
 }
 
@@ -56,4 +108,8 @@ EntryDetails.propTypes = {
     moodId: PropTypes.number,
     userId: PropTypes.number,
   }),
+  mood: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  })
 };

@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import Routing from "../routes";
 import Nav from "../components/Nav";
 import styled from "styled-components";
+import backgroundImg from '../images/backgroundImage.jpg';
 
 const Body = styled.div`
   display: flex;
   justify-content: center;
   text-align: center;
   position: relative;
+  background-image: url(${backgroundImg});
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 `;
 
 const Content = styled.div`

@@ -19,6 +19,7 @@ const Content = styled.div`
 const ChartStyle = styled.div`
   width: 500px;
   height: 500px;
+  margin-top: 80px;
 `;
 
 Chart.register(ArcElement, Title, Legend, Tooltip);
@@ -52,7 +53,7 @@ export default function MoodTracker() {
 
   return (
     <Content>
-    <div>MoodTracker</div>
+    {/* <h2>MoodTracker</h2> */}
     <ChartStyle>
     <Doughnut
           data={{

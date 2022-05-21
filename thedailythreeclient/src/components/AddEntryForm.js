@@ -4,7 +4,49 @@ import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import { addNewEntry } from '../data/entryData';
+import styled from 'styled-components';
 import { getAllMoods } from '../data/moodData';
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background-color: #b2b1bf;
+  opacity: 0.7;
+  width: 600px;
+  margin-top: 15px;
+  border-radius: 75px;
+  padding: 50px;
+  text-align: left;
+`;
+
+const FormGroupStyle = styled(FormGroup)`
+  margin: 10px;
+`;
+
+const InputStyle = styled(Input)`
+  background-color:  #b2b1bf;
+  border-radius: 5px;
+  height: 20px;
+  width: 400px;
+`;
+
+const ButtonStyle = styled(Button)`
+background-color: #b2b1bf;
+opacity: 0.7;
+border-radius: 5px;
+border: 1px solid black;
+height: 40px;
+width: 80px;
+`;
 
 const initialState = {
   thing1: '',
@@ -62,49 +104,59 @@ export default function AddEntryForm() {
   }, [])
 
   return (
-    <>
+    <Container>
+    <Wrapper>
+      <h5>Please complete the form with three things you are grateful for today and your mood, along with any additional comments :)</h5>
       <Form onSubmit={handleClick}>
-        <FormGroup>
-          <Label for="thing1">1:</Label>
-          <Input
+        <FormGroupStyle>
+          <Label for="thing1"></Label>
+          <InputStyle
             onChange={(e) => handleChange(e)}
             value={formInput.thing1}
             type="text"
             name="thing1"
             id="thing1"
+            placeholder="What I'm grateful for..."
+            required
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="thing2">2:</Label>
-          <Input
+        </FormGroupStyle>
+        <FormGroupStyle>
+          <Label for="thing2"></Label>
+          <InputStyle
             onChange={(e) => handleChange(e)}
             value={formInput.thing2}
             type="text"
             name="thing2"
             id="thing2"
+            placeholder="What I'm grateful for..."
+            required
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="thing3">3:</Label>
-          <Input
+        </FormGroupStyle>
+        <FormGroupStyle>
+          <Label for="thing3"></Label>
+          <InputStyle
             onChange={(e) => handleChange(e)}
             value={formInput.thing3}
             type="text"
             name="thing3"
             id="thing3"
+            placeholder="What I'm grateful for..."
+            required
           />
-        </FormGroup>
-        <FormGroup>
-          <Label for="comment">Additional Comments:</Label>
-          <Input
+        </FormGroupStyle>
+        <FormGroupStyle>
+          <Label for="comment"></Label>
+          <InputStyle
             onChange={(e) => handleChange(e)}
             value={formInput.comment}
             type="textarea"
             name="comment"
             id="comment"
+            style={{ height: '200px' }}
+            placeholder="Additional comments..."
           />
-        </FormGroup>
-        <FormGroup tag="fieldset">
+        </FormGroupStyle>
+        <FormGroupStyle tag="fieldset">
         <legend>How are you feeling today?</legend>
         {moods.map((mood) => (
           <FormGroup key={mood.id} check>
@@ -114,9 +166,12 @@ export default function AddEntryForm() {
             </Label>
           </FormGroup>
         ))}
-        </FormGroup>
-        <Button type="submit">Submit</Button>
+        </FormGroupStyle>
+        <Container>
+        <ButtonStyle type="submit" className="submit-btn">Submit</ButtonStyle>
+        </Container>
       </Form>
-    </>
+    </Wrapper>
+    </Container>
   );
 }

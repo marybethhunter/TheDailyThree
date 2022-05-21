@@ -34,13 +34,13 @@ export default function EntryDetails() {
       <h2>Mood Id: {entry.moodId}</h2>
       <button
         onClick={() => {
-          deleteEntry(entry.id);
-          navigate("/");
+          deleteEntry(entry.id, entry.userId);
+          navigate("/home");
         }}
       >
         Delete Entry
       </button>
-      <button onClick={() => navigate("/")}>Go Back</button>
+      <button onClick={() => navigate("/home")}>Go Back</button>
     </Wrapper>
   );
 }

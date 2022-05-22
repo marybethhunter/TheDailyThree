@@ -18,15 +18,16 @@ const ButtonStyle = styled.button`
   font-size: 35px;
   background-color: #b2b1bf;
   opacity: 0.7;
+  margin-bottom: 10px;
 `;
 
 const Wrapper = styled.div`
-background-color: #b2b1bf;
-opacity: 0.8;
-width: 600px;
-margin-top: 15px;
-border-radius: 75px;
-padding: 80px;
+  background-color: #b2b1bf;
+  opacity: 0.8;
+  width: 600px;
+  margin-top: 15px;
+  border-radius: 75px;
+  padding: 50px;
 `;
 
 export default function Home() {
@@ -47,20 +48,19 @@ export default function Home() {
   return (
     <Container>
       <>
-      <h1>Your Entries</h1>
-      <ButtonStyle onClick={() => navigate("/addentry")}>+</ButtonStyle>
+        <h1 style={{ opacity: 0.7 }}>Your Entries</h1>
+        <ButtonStyle onClick={() => navigate("/addentry")}>+</ButtonStyle>
 
-      {entries ? (
-        <Wrapper>
-          {entries.map((entry) => (
-            <Entry key={entry.id} entry={entry} />
-          ))}
-        </Wrapper>
-        
-      ) : (
-        ""
-      )}
-    </>
+        {entries ? (
+          <Wrapper>
+            {entries.map((entry) => (
+              <Entry key={entry.id} entry={entry} />
+            ))}
+          </Wrapper>
+        ) : (
+          ""
+        )}
+      </>
     </Container>
   );
 }

@@ -1,10 +1,10 @@
-import React from 'react';
-import AddEntryForm from '../components/AddEntryForm';
+import React from "react";
+import AddEntryForm from "../components/AddEntryForm";
 
 export default function AddEntry() {
   return (
     <>
-     <AddEntryForm />
+      <AddEntryForm />
     </>
   );
 }

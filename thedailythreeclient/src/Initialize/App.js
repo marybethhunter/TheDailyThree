@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Routing from "../routes";
 import Nav from "../components/Nav";
 import styled from "styled-components";
-import backgroundImg from '../images/backgroundImage.jpg';
+import backgroundImg from "../images/backgroundImage.jpg";
 
 const Body = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const Body = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  width: 100%
+  width: 100%;
 `;
 
 const Content = styled.div`

@@ -11,7 +11,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 40px;
 `;
 
 const Wrapper = styled.div`
@@ -23,13 +23,13 @@ const Wrapper = styled.div`
   width: 600px;
   margin-top: 15px;
   border-radius: 75px;
-  padding: 50px;
+  padding: 45px;
 `;
 
 const LinkWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 30px;
 `;
 
 export default function EntryDetails() {
@@ -60,13 +60,17 @@ export default function EntryDetails() {
           <li>{entry.thing2}</li>
           <li>{entry.thing3}</li>
         </ul>
-        <h4>Comments: {entry.comment}</h4>
+        {entry.comment && (
+          <>
+            <h4>Comments: </h4>
+            <ul>
+              <li>{entry.comment}</li>
+            </ul>
+          </>
+        )}
         <h4>Mood: {mood.name}</h4>
         <LinkWrapper>
-          <Link
-          onClick={() => deleteEntry(entry.id, entry.userId)}
-          to="/home"
-          >
+          <Link onClick={() => deleteEntry(entry.id, entry.userId)} to="/home">
             <svg
               width="24px"
               height="24px"
@@ -111,5 +115,5 @@ EntryDetails.propTypes = {
   mood: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-  })
+  }),
 };

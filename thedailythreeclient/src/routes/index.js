@@ -10,7 +10,7 @@ export default function Routing() {
   return (
     <Routes>
       <Route exact path="/home" element={<Home />} />
-      <Route exact path="/signin" element={<SignIn />} />
+      <Route exact path="/" element={<SignIn />} />
       <Route exact path="/moodtracker" element={<MoodTracker />} />
       <Route exact path="/addentry" element={<AddEntry />} />
       <Route exact path="/details/:entryKey" element={<EntryDetails />} />

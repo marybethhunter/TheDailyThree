@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import gratefulLogo from '../images/gratefulLogo.png'
-import PropTypes from 'prop-types';
+import React from "react";
+import styled from "styled-components";
+import gratefulLogo from "../images/gratefulLogo.png";
+import PropTypes from "prop-types";
 
 const Logo = styled.img`
   width: 50px;
@@ -11,17 +11,21 @@ const Logo = styled.img`
   top: 18px;
 `;
 
-export default function NavIcon({expanded, setExpanded}) {
+export default function NavIcon({ expanded, setExpanded }) {
   const recordClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Logo src={gratefulLogo} onClick={recordClick} className={expanded ? "navIcon-expanded" : "navIcon-hidden"} />
-  )
+    <Logo
+      src={gratefulLogo}
+      onClick={recordClick}
+      className={expanded ? "navIcon-expanded" : "navIcon-hidden"}
+    />
+  );
 }
 
 NavIcon.propTypes = {
   expanded: PropTypes.bool.isRequired,
-  setExpanded: PropTypes.func.isRequired
-}
+  setExpanded: PropTypes.func.isRequired,
+};

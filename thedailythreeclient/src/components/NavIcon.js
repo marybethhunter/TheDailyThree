@@ -8,7 +8,7 @@ const Logo = styled.img`
   height: 50px;
   position: absolute;
   right: 5px;
-  top: 10px;
+  top: 18px;
 `;
 
 export default function NavIcon({expanded, setExpanded}) {

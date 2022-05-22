@@ -20,6 +20,7 @@ const NavContent = styled.div`
   margin-left: 8px;
   gap: 20px;
   margin-top: 90px;
+  border-top: 5px double black;
 `;
 
 const NavLink = styled.div`
@@ -29,6 +30,13 @@ const NavLink = styled.div`
     cursor: pointer;
     font-size: 130%;
   }
+`;
+
+const NavHeader = styled.div`
+  font-size: 140%;
+  white-space: nowrap;
+  text-decoration: underline;
+  margin: 10px 0px;
 `;
 
 export default function Nav({expanded, setExpanded}) {
@@ -42,6 +50,7 @@ export default function Nav({expanded, setExpanded}) {
     <NavContainer>
       <NavIcon expanded={expanded} setExpanded={setExpanded} />
       <NavContent className={expanded ? "navContent-expanded" : "navContent-hidden"}>
+      <NavHeader className={expanded ? "nav-expanded" : "nav-hidden"}>The Daily Three</NavHeader>
         <NavLink onClick={() => navTo("Home")} className={expanded ? "nav-expanded" : "nav-hidden"}>Your Entries</NavLink>
         <NavLink onClick={() => navTo("MoodTracker")} className={expanded ? "nav-expanded" : "nav-hidden"}>Mood Tracker</NavLink>
       </NavContent>

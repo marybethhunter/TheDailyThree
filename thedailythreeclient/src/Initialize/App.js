@@ -13,6 +13,7 @@ const Body = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  width: 100%
 `;
 
 const Content = styled.div`

@@ -10,7 +10,7 @@ const getAllUserEntries = (userId) =>
       .catch(reject);
   });
 
-  const getAllUserEntriesByUid = (uid) =>
+const getAllUserEntriesByUid = (uid) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${dbURL}/entries/user/uid/${uid}`)
@@ -39,4 +39,23 @@ const addNewEntry = (entryObj) =>
     axios.post(`${dbURL}/entries`, entryObj).then(resolve).catch(reject);
   });
 
-export { getAllUserEntries, getSingleEntry, deleteEntry, addNewEntry, getAllUserEntriesByUid };
+const getMostRecentEntryByUid = (uid) =>
+  new Promise((resolve, reject) => {
+    getAllUserEntriesByUid(uid)
+      .then((allEntries) => {
+        const newestEntry = allEntries.reduce((a, b) =>
+          a.dateCreated < b.dateCreated ? a : b
+        );
+        resolve(newestEntry);
+      })
+      .catch(reject);
+  });
+
+export {
+  getAllUserEntries,
+  getSingleEntry,
+  deleteEntry,
+  addNewEntry,
+  getAllUserEntriesByUid,
+  getMostRecentEntryByUid,
+};

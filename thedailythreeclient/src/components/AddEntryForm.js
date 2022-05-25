@@ -175,7 +175,6 @@ export default function AddEntryForm({ user }) {
                     id={`${mood.id}`}
                     onChange={(e) => handleChecked(e)}
                     value={`${mood.id}`}
-                    required
                   />{" "}
                   {mood.name}
                 </Label>

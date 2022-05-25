@@ -17,7 +17,8 @@ const Content = styled.div`
 const ChartStyle = styled.div`
   width: 500px;
   height: 500px;
-  margin-top: 60px;
+  margin-top: 20px;
+  opacity: 0.90;
 `;
 
 Chart.register(ArcElement, Title, Legend, Tooltip);
@@ -51,6 +52,8 @@ export default function MoodTracker({ user }) {
   return (
     <Content>
       {userMoods ? (
+        <>
+        <h1 style={{ opacity: 0.5, marginTop: '30px' }}>{user.fullName}'s Moods</h1>
         <ChartStyle>
           <Doughnut
             data={{
@@ -64,6 +67,7 @@ export default function MoodTracker({ user }) {
             }}
           />
         </ChartStyle>
+        </>
       ) : (
         <>
           <h1 style={{ opacity: 0.7, marginTop: '60px' }}>

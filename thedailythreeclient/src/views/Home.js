@@ -48,8 +48,8 @@ export default function Home({ user }) {
   return (
     <Container>
       <>
-        <h1 style={{ opacity: 0.7 }}>{user.fullName}'s Entries</h1>
-        <ButtonStyle onClick={() => navigate("/addentry")}>+</ButtonStyle>
+        <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Entries</h1>
+        <ButtonStyle className="submit-btn" onClick={() => navigate("/addentry")}>+</ButtonStyle>
         {entries ? (
           <Wrapper>
             {entries.map((entry) => (

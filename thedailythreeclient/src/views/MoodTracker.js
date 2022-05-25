@@ -5,8 +5,6 @@ import { Chart, ArcElement, Legend, Tooltip, Title } from "chart.js";
 import colors from "../helpers/colors";
 import styled from "styled-components";
 
-//TODO: after auth, take out hardcoded user
-
 const Content = styled.div`
   display: flex;
   justify-content: center;
@@ -18,7 +16,18 @@ const ChartStyle = styled.div`
   width: 500px;
   height: 500px;
   margin-top: 20px;
-  opacity: 0.90;
+  opacity: 0.9;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  text-align: center;
+  background-color: #b2b1bf;
+  opacity: 0.6;
+  width: 700px;
+  margin-top: 100px;
+  border-radius: 75px;
+  padding: 45px;
 `;
 
 Chart.register(ArcElement, Title, Legend, Tooltip);
@@ -51,28 +60,31 @@ export default function MoodTracker({ user }) {
 
   return (
     <Content>
-      {userMoods ? (
-        <>
-        <h1 style={{ opacity: 0.5, marginTop: '30px' }}>{user.fullName}'s Moods</h1>
-        <ChartStyle>
-          <Doughnut
-            data={{
-              labels: chartLabels,
-              datasets: [
-                {
-                  data: chartValues,
-                  backgroundColor: colors,
-                },
-              ],
-            }}
-          />
-        </ChartStyle>
-        </>
-      ) : (
-        <>
-          <h1 style={{ opacity: 0.7, marginTop: '60px' }}>
+      {userMoods.length === 0 && (
+        <Wrapper>
+          <h1>
             Begin gratitude journaling to generate Mood Tracker :)
           </h1>
+        </Wrapper>
+      )}
+      {userMoods.length !== 0 && (
+        <>
+          <h1 style={{ opacity: 0.5, marginTop: "30px" }}>
+            {user.fullName}'s Moods
+          </h1>
+          <ChartStyle>
+            <Doughnut
+              data={{
+                labels: chartLabels,
+                datasets: [
+                  {
+                    data: chartValues,
+                    backgroundColor: colors,
+                  },
+                ],
+              }}
+            />
+          </ChartStyle>
         </>
       )}
     </Content>

@@ -19,12 +19,11 @@ const ButtonStyle = styled.button`
   font-size: 35px;
   background-color: #b2b1bf;
   opacity: 0.7;
-  margin-bottom: 10px;
 `;
 
 const Wrapper = styled.div`
   background-color: #b2b1bf;
-  opacity: 0.8;
+  opacity: 0.6;
   width: 600px;
   margin-top: 15px;
   border-radius: 75px;
@@ -48,16 +47,33 @@ export default function Home({ user }) {
   return (
     <Container>
       <>
-        <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Entries</h1>
-        <ButtonStyle className="submit-btn" onClick={() => navigate("/addentry")}>+</ButtonStyle>
-        {entries ? (
-          <Wrapper>
-            {entries.map((entry) => (
-              <Entry key={entry.id} entry={entry} />
-            ))}
+        {entries.length !== 0 && (
+          <>
+            <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Entries</h1>
+            <ButtonStyle
+              className="submit-btn"
+              onClick={() => navigate("/addentry")}
+            >
+              +
+            </ButtonStyle>
+
+            <Wrapper>
+              {entries.map((entry) => (
+                <Entry key={entry.id} entry={entry} />
+              ))}
+            </Wrapper>
+          </>
+        )}
+        {entries.length === 0 && (
+          <Wrapper style={{ marginTop: '100px', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
+            <h1>Add an entry to get started!</h1>
+            <ButtonStyle
+              className="submit-btn"
+              onClick={() => navigate("/addentry")}
+            >
+              +
+            </ButtonStyle>
           </Wrapper>
-        ) : (
-          <h2 style={{ opacity: 0.7 }}>Add an entry to get started!</h2>
         )}
       </>
     </Container>

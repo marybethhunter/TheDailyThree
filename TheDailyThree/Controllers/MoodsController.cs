@@ -32,10 +32,10 @@ namespace TheDailyThree.Controllers
             return Ok(match);
         }
 
-        [HttpGet("user/{userId}")]
-        public List<Mood> GetAllMoods(int userId)
+        [HttpGet("user/{uid}")]
+        public List<Mood> GetAllMoods(string uid)
         {
-            return _moodRepo.GetAllMoodsOfAUser(userId);
+            return _moodRepo.GetAllMoodsOfAUser(uid);
         }
     }
 }

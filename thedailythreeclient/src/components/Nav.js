@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import NavIcon from "./NavIcon";
 import PropTypes from "prop-types";
+import { signOutUser } from "../data/userData";
 
 const NavContainer = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ const NavHeader = styled.div`
   margin: 10px 0px;
 `;
 
-export default function Nav({ expanded, setExpanded }) {
+export default function Nav({ expanded, setExpanded, user }) {
   const navigate = useNavigate();
 
   const navTo = (pathname) => {
@@ -55,18 +56,28 @@ export default function Nav({ expanded, setExpanded }) {
         <NavHeader className={expanded ? "nav-expanded" : "nav-hidden"}>
           The Daily Three
         </NavHeader>
-        <NavLink
-          onClick={() => navTo("Home")}
-          className={expanded ? "nav-expanded" : "nav-hidden"}
-        >
-          Your Entries
-        </NavLink>
-        <NavLink
-          onClick={() => navTo("MoodTracker")}
-          className={expanded ? "nav-expanded" : "nav-hidden"}
-        >
-          Mood Tracker
-        </NavLink>
+        {user && (
+          <>
+            <NavLink
+              onClick={() => navigate(`/home/${user.uid}`)}
+              className={expanded ? "nav-expanded" : "nav-hidden"}
+            >
+              Your Entries
+            </NavLink>
+            <NavLink
+              onClick={() => navTo("MoodTracker")}
+              className={expanded ? "nav-expanded" : "nav-hidden"}
+            >
+              Mood Tracker
+            </NavLink>
+            <NavLink
+              onClick={() => signOutUser().then(() => navigate("/"))}
+              className={expanded ? "nav-expanded" : "nav-hidden"}
+            >
+              Sign Out
+            </NavLink>
+          </>
+        )}
       </NavContent>
     </NavContainer>
   );

@@ -6,6 +6,6 @@ namespace TheDailyThree.Data_Access
     {
         List<Mood> GetAllMoods();
         Mood GetMoodById(int id);
-        List<Mood> GetAllMoodsOfAUser(int userId);
+        List<Mood> GetAllMoodsOfAUser(string uid);
     }
 }

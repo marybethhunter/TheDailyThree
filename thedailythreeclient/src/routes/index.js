@@ -1,19 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Route, Routes } from "react-router-dom";
-import AddEntry from "../views/AddEntry";
-import MoodTracker from "../views/MoodTracker";
-import SignIn from "../views/SignIn";
 import Home from "../views/Home";
+import MoodTracker from "../views/MoodTracker";
+import AddEntry from "../views/AddEntry";
 import EntryDetails from "../views/EntryDetails";
 
-export default function Routing() {
+export default function Routing({ user }) {
   return (
     <Routes>
-      <Route exact path="/home" element={<Home />} />
-      <Route exact path="/" element={<SignIn />} />
-      <Route exact path="/moodtracker" element={<MoodTracker />} />
-      <Route exact path="/addentry" element={<AddEntry />} />
-      <Route exact path="/details/:entryKey" element={<EntryDetails />} />
+      <Route exact path="/home/:uid" element={<Home user={user} />} />
+      <Route exact path="/moodtracker" element={<MoodTracker user={user} />} />
+      <Route exact path="/addentry" element={<AddEntry user={user} />} />
+      <Route
+        exact
+        path="/details/:entryKey"
+        element={<EntryDetails user={user} />}
+      />
     </Routes>
   );
 }
+
+Routing.propTypes = {
+  user: PropTypes.shape(PropTypes.obj),
+};
+
+Routing.defaultProps = {
+  user: null,
+};

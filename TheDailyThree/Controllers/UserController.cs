@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FirebaseAdmin.Auth;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TheDailyThree.Data_Access;
 using TheDailyThree.Models;
@@ -50,6 +52,42 @@ namespace TheDailyThree.Controllers
             }
             _userRepo.UpdateUser(userToUpdate);
             return NoContent();
+        }
+
+        [HttpGet("{uid}")]
+        public ActionResult UserByUid(string uid)
+        {
+            User user = _userRepo.GetUserByUid(uid);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(user);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("Auth")]
+        public async Task<IActionResult> GetUserAuthStatus()
+        {
+            string uid = User.FindFirst(claim => claim.Type == "user_id").Value;
+            bool userexists = _userRepo.CheckUserExists(uid);
+            if (!userexists)
+            {
+                User userFromToken = new User()
+                {
+                    Name = User.Identity.Name,
+                    Uid = uid,
+                    Streak = 0,
+                };
+
+                _userRepo.AddUser(userFromToken);
+                return Ok();
+            }
+            User existingUser = _userRepo.GetUserByUid(uid);
+            return Ok(existingUser);
         }
     }
 }

@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { addNewEntry } from "../data/entryData";
 import styled from "styled-components";
 import { getAllMoods } from "../data/moodData";
+import { getUserByUid } from "../data/userData";
 
 const Container = styled.div`
   display: flex;
@@ -53,12 +54,11 @@ const initialState = {
   comment: "",
 };
 
-//TODO: fix this hardcoded userId  once auth in place
-
-export default function AddEntryForm() {
+export default function AddEntryForm({ user }) {
   const [formInput, setFormInput] = useState(initialState);
   const [moods, setMoods] = useState([]);
   const [mood, setMood] = useState([]);
+  const [verifiedUser, setVerifiedUser] = useState(null);
   const navigate = useNavigate();
 
   const handleChecked = (e) => {
@@ -95,9 +95,9 @@ export default function AddEntryForm() {
     addNewEntry({
       ...formInput,
       date: new Date().toDateString(),
-      userId: 1,
+      userId: verifiedUser.id,
       moodId: moodChosen.id,
-    }).then(navigate("/home"));
+    }).then(navigate(`/home/${user.uid}`));
   };
 
   useEffect(() => {
@@ -105,6 +105,7 @@ export default function AddEntryForm() {
     getAllMoods().then((moodArray) => {
       if (isMounted) setMoods(moodArray);
     });
+    getUserByUid(user.uid).then(setVerifiedUser)
   }, []);
 
   return (

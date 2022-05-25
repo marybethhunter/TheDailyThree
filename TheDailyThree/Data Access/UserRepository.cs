@@ -81,6 +81,29 @@ namespace TheDailyThree.Data_Access
             }
         }
 
+        public User GetUserByUid(string _uid)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT * FROM [User]
+                        WHERE Uid = @uid
+                    ";
+
+                    cmd.Parameters.AddWithValue("@uid", _uid);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var user = ReadUsers(reader).FirstOrDefault();
+                        return user;
+                    }
+                }
+            }
+        }
+
         public void UpdateUser(User _user)
         {
             using (SqlConnection conn = Connection)
@@ -103,6 +126,34 @@ namespace TheDailyThree.Data_Access
                 }
             }
 
+        }
+
+        public bool CheckUserExists(string _uid)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT *
+                                        FROM [User]
+										WHERE Uid = @uid";
+
+                    cmd.Parameters.AddWithValue("@uid", _uid);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return false;
+                    }
+                }
+            }
         }
     }
 }

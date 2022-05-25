@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllUserEntries } from "../data/entryData";
+import { useParams } from "react-router";
+import { getAllUserEntriesByUid } from "../data/entryData";
 import Entry from "../components/Entry";
 import styled from "styled-components";
 
@@ -30,15 +31,14 @@ const Wrapper = styled.div`
   padding: 50px;
 `;
 
-export default function Home() {
+export default function Home({ user }) {
   const [entries, setEntries] = useState([]);
-  //TODO: after auth setup: get userId dynamically, not hardcoded in state
-  const [userId] = useState(1);
   const navigate = useNavigate();
+  const { uid } = useParams();
 
   useEffect(() => {
     let isMounted = true;
-    getAllUserEntries(userId).then((entriesArray) => {
+    getAllUserEntriesByUid(uid).then((entriesArray) => {
       if (isMounted) setEntries(entriesArray);
     });
   });
@@ -48,9 +48,8 @@ export default function Home() {
   return (
     <Container>
       <>
-        <h1 style={{ opacity: 0.7 }}>Your Entries</h1>
+        <h1 style={{ opacity: 0.7 }}>{user.fullName}'s Entries</h1>
         <ButtonStyle onClick={() => navigate("/addentry")}>+</ButtonStyle>
-
         {entries ? (
           <Wrapper>
             {entries.map((entry) => (
@@ -58,7 +57,7 @@ export default function Home() {
             ))}
           </Wrapper>
         ) : (
-          ""
+          <h2 style={{ opacity: 0.7 }}>Add an entry to get started!</h2>
         )}
       </>
     </Container>

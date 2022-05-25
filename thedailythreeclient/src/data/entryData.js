@@ -10,6 +10,14 @@ const getAllUserEntries = (userId) =>
       .catch(reject);
   });
 
+  const getAllUserEntriesByUid = (uid) =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(`${dbURL}/entries/user/uid/${uid}`)
+      .then((response) => resolve(Object.values(response.data)))
+      .catch(reject);
+  });
+
 const getSingleEntry = (entryId) =>
   new Promise((resolve, reject) => {
     axios
@@ -18,11 +26,11 @@ const getSingleEntry = (entryId) =>
       .catch(reject);
   });
 
-const deleteEntry = (entryId, userId) =>
+const deleteEntry = (entryId, uid) =>
   new Promise((resolve, reject) => {
     axios
       .delete(`${dbURL}/entries/${entryId}`)
-      .then(() => getAllUserEntries(userId).then(resolve))
+      .then(() => getAllUserEntries(uid).then(resolve))
       .catch(reject);
   });
 
@@ -31,4 +39,4 @@ const addNewEntry = (entryObj) =>
     axios.post(`${dbURL}/entries`, entryObj).then(resolve).catch(reject);
   });
 
-export { getAllUserEntries, getSingleEntry, deleteEntry, addNewEntry };
+export { getAllUserEntries, getSingleEntry, deleteEntry, addNewEntry, getAllUserEntriesByUid };

@@ -32,7 +32,7 @@ const LinkWrapper = styled.div`
   margin-top: 30px;
 `;
 
-export default function EntryDetails() {
+export default function EntryDetails({ user }) {
   const [entry, setEntry] = useState({});
   const [mood, setMood] = useState({});
   const { entryKey } = useParams();
@@ -70,7 +70,7 @@ export default function EntryDetails() {
         )}
         <h4>Mood: {mood.name}</h4>
         <LinkWrapper>
-          <Link onClick={() => deleteEntry(entry.id, entry.userId)} to="/home">
+          <Link onClick={() => deleteEntry(entry.id, user.uid)} to={`/home/${user.uid}`}>
             <svg
               width="24px"
               height="24px"
@@ -83,7 +83,7 @@ export default function EntryDetails() {
               </g>
             </svg>
           </Link>
-          <Link to="/home">
+          <Link to={`/home/${user.uid}`}>
             <svg
               width="24px"
               height="24px"

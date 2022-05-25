@@ -21,7 +21,7 @@ const ButtonStyle = styled.button`
 export default function SignIn() {
   return (
     <Container>
-        <ButtonStyle onClick={signInUser}>Sign In</ButtonStyle>
+        <ButtonStyle className="submit-btn" onClick={signInUser}>Sign In</ButtonStyle>
     </Container>
   );
 }

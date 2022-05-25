@@ -20,6 +20,12 @@ namespace TheDailyThree.Controllers
             return _entryRepo.GetAllUserEntries(userId);
         }
 
+        [HttpGet("user/uid/{uid}")]
+        public List<Entry> GetAllEntriesByUid(string uid)
+        {
+            return _entryRepo.GetUserEntriesByUid(uid);
+        }
+
         [HttpGet("id/{id}")]
         public IActionResult GetSingleEntry(int id)
         {

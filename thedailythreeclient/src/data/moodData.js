@@ -18,10 +18,10 @@ const getSingleMood = (moodId) =>
       .catch(reject);
   });
 
-const getAllUsersMoods = (userId) =>
+const getAllUsersMoods = (uid) =>
   new Promise((resolve, reject) => {
     axios
-      .get(`${dbURL}/moods/user/${userId}`)
+      .get(`${dbURL}/moods/user/${uid}`)
       .then((response) => resolve(Object.values(response.data)))
       .catch(reject);
   });

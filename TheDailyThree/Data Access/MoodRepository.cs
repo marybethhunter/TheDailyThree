@@ -56,7 +56,7 @@ namespace TheDailyThree.Data_Access
             }
         }
 
-        public List<Mood> GetAllMoodsOfAUser(int _userId)
+        public List<Mood> GetAllMoodsOfAUser(string _uid)
         {
             using (SqlConnection conn = Connection)
             {
@@ -68,10 +68,10 @@ namespace TheDailyThree.Data_Access
                         FROM Mood Mo
                         LEFT JOIN [Entry] En ON En.MoodId = Mo.Id
                         LEFT JOIN [User] Us ON Us.Id = En.UserId
-                        WHERE Us.Id = @id;
+                        WHERE Us.[uid] = @uid;
                     ";
 
-                    cmd.Parameters.AddWithValue("@id", _userId);
+                    cmd.Parameters.AddWithValue("@uid", _uid);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

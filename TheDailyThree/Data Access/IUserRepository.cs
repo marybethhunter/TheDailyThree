@@ -4,8 +4,10 @@ namespace TheDailyThree.Data_Access
 {
     public interface IUserRepository
     {
-        void AddUser(User newUser);
+        public void AddUser(User newUser);
         User GetUserById(int id);
-        void UpdateUser(User userToUpdate);
+        public void UpdateUser(User userToUpdate);
+        public bool CheckUserExists(string uid);
+        User GetUserByUid(string uid);
     }
 }

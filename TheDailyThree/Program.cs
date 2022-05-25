@@ -1,3 +1,7 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using TheDailyThree.Data_Access;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +26,25 @@ builder.Services.AddCors(options =>
                       });
 });
 
+FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile(builder.Configuration["fbCredPath"]),
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.IncludeErrorDetails = true;
+    options.Authority = "https://securetoken.google.com/thedailythree-7c175";
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = "https://securetoken.google.com/thedailythree-7c175",
+        ValidateAudience = true,
+        ValidAudience = "thedailythree-7c175",
+        ValidateLifetime = true,
+    };
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,6 +57,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

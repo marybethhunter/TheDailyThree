@@ -22,14 +22,14 @@ const ChartStyle = styled.div`
 
 Chart.register(ArcElement, Title, Legend, Tooltip);
 
-export default function MoodTracker() {
+export default function MoodTracker({ user }) {
   const [userMoods, setUserMoods] = useState([]);
   const [chartLabels, setChartLabels] = useState([]);
   const [chartValues] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
-    getAllUsersMoods(1).then((moodArray) => {
+    getAllUsersMoods(user.uid).then((moodArray) => {
       if (isMounted) setUserMoods(moodArray);
       const countMood1 = moodArray.filter((mood) => mood.id === 1).length;
       const countMood2 = moodArray.filter((mood) => mood.id === 2).length;

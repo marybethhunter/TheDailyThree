@@ -107,6 +107,30 @@ namespace TheDailyThree.Data_Access
             }
         }
 
+        public List<Entry> GetUserEntriesByUid(string _uid)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT * FROM [Entry] En
+                        LEFT JOIN [User] Us ON Us.Id = En.UserId
+                        WHERE Us.[Uid] = @uid;
+                    ";
+
+                    cmd.Parameters.AddWithValue("@uid", _uid);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var entries = ReadEntries(reader);
+                        return entries;
+                    }
+                }
+            }
+        }
+
         public Entry GetEntryById(int _id)
         {
             using (SqlConnection conn = Connection)

@@ -14,9 +14,9 @@
 ## Features: 
 
 #### **Authenticated Users**:
-* Authenticated users can...
+* Authenticated users can log into The Daily Three with their Google account and add a daily gratitude entry and mood. They can see a list of all of their past entries, as well as see the details of each past entry. Any entry can also be deleted.
 #### **Chart.js**: 
-* Users can see...
+* Users can access the Mood Tracker view and see a Chart.js doughnut graph of their moods. This can be used to see their baseline/most common mood and maybe even see it improve over time as the ‘happier’ moods increase in quantity.
 
 ## Loom Walkthrough:
 
@@ -31,7 +31,30 @@
 ## Code Snippets:
 
 ```javascript
-//insert code snippet here
+useEffect(() => {
+    let isMounted = true;
+    getMostRecentEntryByUid(uid).then((entry) => {
+      setNewestEntry(entry);
+    });
+    const currentDate = new Date().toDateString();
+    getAllUserEntriesByUid(uid).then((entriesArray) => {
+      if (isMounted) setEntries(entriesArray);
+      if (
+        entriesArray.length !== 0 &&
+        newestEntry.date === currentDate.toString()
+      ) {
+        setCanAddEntry(false);
+      }
+      if (
+        entriesArray.length !== 0 &&
+        newestEntry.date !== currentDate.toString()
+      ) {
+        setCanAddEntry(true);
+      } else if (entriesArray.length === 0) {
+        setCanAddEntry(true);
+      }
+    });
+  }, [canAddEntry, uid, entries.length]);
 ```
 
 ## Technology Used:
@@ -49,5 +72,9 @@
 
 ## Screenshots:
 
+![2022-05-28](https://user-images.githubusercontent.com/86667443/170832207-239132f5-79a2-46ea-a987-3d027d49a9cb.png)
+![2022-05-28 (1)](https://user-images.githubusercontent.com/86667443/170832232-c34aa62d-a4a9-493d-a73c-02a32fa8145d.png)
+![2022-05-28 (2)](https://user-images.githubusercontent.com/86667443/170832260-ca2af8a2-69e3-447b-ba31-740c697fdd2e.png)
+![2022-05-28 (3)](https://user-images.githubusercontent.com/86667443/170832269-e54ca575-a2b3-47c1-9587-ef660fb3f5a5.png)
 
 ## Contributors: Mary Beth Hunter, [Github](https://github.com/marybethhunter), [Portfolio](https://marybeth-hunter.com/), [LinkedIn](www.linkedin.com/in/marybhunter1)

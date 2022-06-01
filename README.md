@@ -4,7 +4,7 @@
 
 
 ```javascript
- $ https://github.com/marybethhunter/TheDailyThree.git
+ $ git clone git@github.com:marybethhunter/TheDailyThree.git
  $ cd TheDailyThree
 ```
 

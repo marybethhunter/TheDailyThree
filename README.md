@@ -14,7 +14,8 @@
 ## Features: 
 
 #### **Authenticated Users**:
-* Authenticated users can log into The Daily Three with their Google account and add a daily gratitude entry and mood. They can see a list of all of their past entries, as well as see the details of each past entry. Any entry can also be deleted.
+* Users can log into The Daily Three with their Google account and add a daily gratitude entry and mood. They can see a list of all of their past entries, as well as see the details of each past entry. Any entry can also be deleted.
+* Users can create, edit, view the details of, and delete custom goals. They can toggle the goal as completed or uncompleted as they make or do not make progress.
 #### **Chart.js**: 
 * Users can access the Mood Tracker view and see a Chart.js doughnut graph of their moods. This can be used to see their baseline/most common mood and maybe even see it improve over time as the ‘happier’ moods increase in quantity.
 

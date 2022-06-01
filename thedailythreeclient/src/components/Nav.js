@@ -71,6 +71,12 @@ export default function Nav({ expanded, setExpanded, user }) {
               Mood Tracker
             </NavLink>
             <NavLink
+              onClick={() => navTo("Goals")}
+              className={expanded ? "nav-expanded" : "nav-hidden"}
+            >
+              Goals
+            </NavLink>
+            <NavLink
               onClick={() => signOutUser().then(() => navigate("/"))}
               className={expanded ? "nav-expanded" : "nav-hidden"}
             >

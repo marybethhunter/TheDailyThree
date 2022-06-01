@@ -88,7 +88,7 @@ export default function AddEditGoalForm({ obj = {}, user }) {
         { ...formInput, userId: verifiedUser.id, id: obj.id },
         user.uid
       ).then(() => {
-        navigate("/goals");
+        navigate(`/goaldetails/${obj.id}`);
       });
     } else {
       addNewGoal({ ...formInput, userId: verifiedUser.id }).then(() => {

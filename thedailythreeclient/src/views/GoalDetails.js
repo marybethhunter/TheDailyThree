@@ -6,8 +6,11 @@ import {
   deleteGoal,
   getSingleGoal,
   getAllUserGoalsByUid,
+  updateGoal,
 } from "../data/goalData";
 import { Link } from "react-router-dom";
+import { getUserByUid } from "../data/userData";
+import ToggleSwitch from "../components/ToggleSwitch";
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +40,8 @@ const LinkWrapper = styled.div`
 
 export default function GoalDetails({ user }) {
   const [goal, setGoal] = useState({});
+  const [value, setValue] = useState(goal.completed);
+  const [verifiedUser, setVerifiedUser] = useState(null);
   const { goalKey } = useParams();
 
   useEffect(() => {
@@ -44,14 +49,28 @@ export default function GoalDetails({ user }) {
     if (isMounted) {
       getSingleGoal(goalKey).then((res) => {
         setGoal(res);
+        setValue(res.completed);
       });
     }
+    getUserByUid(user.uid).then(setVerifiedUser);
     return () => {
       isMounted = false;
     };
   }, []);
 
-  //TODO: fix completed bool showing up as nothing or have a toggle to mark as completed!
+  const handleClick = () => {
+    updateGoal(
+      goal.id,
+      {
+        title: goal.title,
+        description: goal.description,
+        completed: !value,
+        userId: verifiedUser.id,
+        id: goal.id,
+      },
+      user.uid
+    ).then(() => getSingleGoal(goalKey));
+  };
 
   return (
     <Container>
@@ -61,7 +80,22 @@ export default function GoalDetails({ user }) {
         <ul>
           <li>{goal.description}</li>
         </ul>
-        <h4>Status: {goal.completed}</h4>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <h4 style={{ marginRight: 15 }}>Completed?</h4>
+          <ToggleSwitch
+            isOn={value}
+            handleToggle={() => {
+              handleClick();
+              setValue(!value);
+            }}
+          />
+        </div>
         <LinkWrapper>
           <Link
             onClick={() =>

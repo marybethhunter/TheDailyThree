@@ -14,6 +14,7 @@ builder.Services.AddTransient<IEntryRepository, EntryRepository>();
 builder.Services.AddTransient<IMoodRepository, MoodRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IGoalRepository, GoalRepository>();
+builder.Services.AddTransient<IVisionBoardRepository, VisionBoardRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

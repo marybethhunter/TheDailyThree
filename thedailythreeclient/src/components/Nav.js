@@ -77,6 +77,12 @@ export default function Nav({ expanded, setExpanded, user }) {
               Goals
             </NavLink>
             <NavLink
+              onClick={() => navTo("visionBoards")}
+              className={expanded ? "nav-expanded" : "nav-hidden"}
+            >
+              Vision Boards
+            </NavLink>
+            <NavLink
               onClick={() => signOutUser().then(() => navigate("/"))}
               className={expanded ? "nav-expanded" : "nav-hidden"}
             >

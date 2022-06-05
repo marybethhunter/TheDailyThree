@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Goal from "../components/Goal";
 import styled from "styled-components";
-import { getAllUserGoalsByUid } from "../data/goalData";
+import { getAllUserVisionBoardsByUid } from "../data/visionBoardData";
+import VisionBoard from "../components/VisionBoard";
 
 const Container = styled.div`
   display: flex;
@@ -29,27 +29,27 @@ const Wrapper = styled.div`
   padding: 50px;
 `;
 
-export default function Goals({ user }) {
-  const [goals, setGoals] = useState([]);
+export default function VisionBoards({ user }) {
+  const [visionBoards, setVisionBoards] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     let isMounted = true;
-    getAllUserGoalsByUid(user.uid).then((goalArray) => {
-      if (isMounted) setGoals(goalArray);
+    getAllUserVisionBoardsByUid(user.uid).then((vbArray) => {
+      if (isMounted) setVisionBoards(vbArray);
     });
   }, []);
 
   return (
     <Container>
-      <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Goals</h1>
+      <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Vision Boards</h1>
       <ButtonStyle
         className="submit-btn"
-        onClick={() => navigate("/goals/addgoal")}
+        onClick={() => navigate("/visionboards/addvisionboard")}
       >
         +
       </ButtonStyle>
-      {goals.length === 0 && (
+      {visionBoards.length === 0 && (
         <Wrapper
           style={{
             marginTop: "50px",
@@ -59,13 +59,13 @@ export default function Goals({ user }) {
             alignItems: "center",
           }}
         >
-          <h1>Add a goal to get started!</h1>
+          <h1>Add a vision board to get started!</h1>
         </Wrapper>
       )}
-      {goals.length !== 0 && (
+      {visionBoards.length !== 0 && (
           <Wrapper>
-            {goals.map((goal) => (
-              <Goal key={goal.id} goal={goal} />
+            {visionBoards.map((visionBoard) => (
+              <VisionBoard key={visionBoard.id} visionBoard={visionBoard} />
             ))}
           </Wrapper>
         )}

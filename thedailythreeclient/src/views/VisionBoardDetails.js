@@ -89,9 +89,7 @@ export default function VisionBoardDetails({ user }) {
         {showForm && (
           <AddEditVBImageForm vbId={vbKey} setShowForm={setShowForm} />
         )}
-        <div
-          style={{ marginBottom: 20, display: "flex", flexWrap: "wrap" }}
-        >
+        <div style={{ marginBottom: 20, display: "flex", flexWrap: "wrap" }}>
           {visionBoardImages.map((vbImage) => (
             <VBImage vbImage={vbImage} key={vbImage.id} user={user} />
           ))}

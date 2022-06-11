@@ -12,7 +12,7 @@ const getSingleUser = (userId) =>
       .catch(reject);
   });
 
-  const getUserByUid = (uid) =>
+const getUserByUid = (uid) =>
   new Promise((resolve, reject) => {
     axios
       .get(`${dbURL}/users/${uid}`)
@@ -33,12 +33,12 @@ const addNewUser = (userObj) =>
   new Promise((resolve, reject) => {
     axios.post(`${dbURL}/users`, userObj).then(resolve).catch(reject);
   });
- 
+
 const checkUserCreatedInDB = async () => {
-    const token= sessionStorage.getItem("token");
-    await axios.get(`${dbURL}/users/Auth`, {
-        headers: { Authorization: 'Bearer ' + token },
-    });
+  const token = sessionStorage.getItem("token");
+  await axios.get(`${dbURL}/users/Auth`, {
+    headers: { Authorization: "Bearer " + token },
+  });
 };
 
 const signInUser = () => {

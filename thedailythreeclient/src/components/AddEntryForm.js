@@ -105,7 +105,7 @@ export default function AddEntryForm({ user }) {
     getAllMoods().then((moodArray) => {
       if (isMounted) setMoods(moodArray);
     });
-    getUserByUid(user.uid).then(setVerifiedUser)
+    getUserByUid(user.uid).then(setVerifiedUser);
   }, []);
 
   return (

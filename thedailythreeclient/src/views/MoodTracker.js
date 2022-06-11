@@ -62,9 +62,7 @@ export default function MoodTracker({ user }) {
     <Content>
       {userMoods.length === 0 && (
         <Wrapper>
-          <h1>
-            Begin gratitude journaling to generate Mood Tracker :)
-          </h1>
+          <h1>Begin gratitude journaling to generate Mood Tracker :)</h1>
         </Wrapper>
       )}
       {userMoods.length !== 0 && (

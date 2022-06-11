@@ -63,12 +63,12 @@ export default function Goals({ user }) {
         </Wrapper>
       )}
       {goals.length !== 0 && (
-          <Wrapper>
-            {goals.map((goal) => (
-              <Goal key={goal.id} goal={goal} />
-            ))}
-          </Wrapper>
-        )}
+        <Wrapper>
+          {goals.map((goal) => (
+            <Goal key={goal.id} goal={goal} />
+          ))}
+        </Wrapper>
+      )}
     </Container>
   );
 }

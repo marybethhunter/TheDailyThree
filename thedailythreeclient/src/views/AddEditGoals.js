@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
-import AddEditGoalForm from '../components/AddEditGoalForm';
-import { getSingleGoal } from '../data/goalData';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
+import AddEditGoalForm from "../components/AddEditGoalForm";
+import { getSingleGoal } from "../data/goalData";
 
 export default function AddEditGoals({ user }) {
   const [editPost, setEditPost] = useState({});
-  const { goalEditKey } = useParams(); 
+  const { goalEditKey } = useParams();
 
   useEffect(() => {
     let isMounted = true;
@@ -25,7 +25,7 @@ export default function AddEditGoals({ user }) {
     <>
       <AddEditGoalForm obj={editPost} user={user} />
     </>
-  )
+  );
 }
 
 AddEditGoals.propTypes = {

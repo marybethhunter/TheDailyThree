@@ -63,12 +63,12 @@ export default function VisionBoards({ user }) {
         </Wrapper>
       )}
       {visionBoards.length !== 0 && (
-          <Wrapper>
-            {visionBoards.map((visionBoard) => (
-              <VisionBoard key={visionBoard.id} visionBoard={visionBoard} />
-            ))}
-          </Wrapper>
-        )}
+        <Wrapper>
+          {visionBoards.map((visionBoard) => (
+            <VisionBoard key={visionBoard.id} visionBoard={visionBoard} />
+          ))}
+        </Wrapper>
+      )}
     </Container>
   );
 }

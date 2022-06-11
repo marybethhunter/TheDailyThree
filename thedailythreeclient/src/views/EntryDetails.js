@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router";
-import { deleteEntry, getAllUserEntriesByUid, getSingleEntry } from "../data/entryData";
+import {
+  deleteEntry,
+  getAllUserEntriesByUid,
+  getSingleEntry,
+} from "../data/entryData";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { getSingleMood } from "../data/moodData";
@@ -70,9 +74,14 @@ export default function EntryDetails({ user }) {
         )}
         <h4>Mood: {mood.name}</h4>
         <LinkWrapper>
-          <Link onClick={() => deleteEntry(entry.id, user.uid).then(() => {
-            getAllUserEntriesByUid(user.uid);
-          })} to={`/home/${user.uid}`}>
+          <Link
+            onClick={() =>
+              deleteEntry(entry.id, user.uid).then(() => {
+                getAllUserEntriesByUid(user.uid);
+              })
+            }
+            to={`/home/${user.uid}`}
+          >
             <svg
               width="24px"
               height="24px"

@@ -88,10 +88,22 @@ export default function AddEditVBImageForm({ vbId, setShowForm }) {
   return (
     <Container>
       <Wrapper>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <h4>Complete form to add new images to your vision board :)</h4>
-          <ShowFormButtonStyle style={{ marginLeft: 15 }} className="submit-btn" onClick={() => setShowForm(false)}>^</ShowFormButtonStyle>
-          <h6 style={{ marginLeft: 15 }} >(click to collapse)</h6>
+          <ShowFormButtonStyle
+            style={{ marginLeft: 15 }}
+            className="submit-btn"
+            onClick={() => setShowForm(false)}
+          >
+            ^
+          </ShowFormButtonStyle>
+          <h6 style={{ marginLeft: 15 }}>(click to collapse)</h6>
         </div>
         <Form onSubmit={handleClick}>
           <FormGroupStyle>

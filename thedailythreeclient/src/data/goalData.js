@@ -39,7 +39,7 @@ const addNewGoal = (goalObj) =>
     axios.post(`${dbURL}/goals`, goalObj).then(resolve).catch(reject);
   });
 
-  const updateGoal = (goalId, goalObj, uid) =>
+const updateGoal = (goalId, goalObj, uid) =>
   new Promise((resolve, reject) => {
     axios
       .put(`${dbURL}/goals/${goalId}`, goalObj)
@@ -53,5 +53,5 @@ export {
   addNewGoal,
   getSingleGoal,
   getAllUserGoals,
-  getAllUserGoalsByUid
+  getAllUserGoalsByUid,
 };

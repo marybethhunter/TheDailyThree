@@ -3,19 +3,20 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { getUserByUid } from "../data/userData";
 import {
   getSingleVisionBoard,
   getAllUserVisionBoardsByUid,
   deleteVisionBoard,
 } from "../data/visionBoardData";
+import { getAllVisionBoardImagesByVBId } from "../data/visionBoardImageData";
+import VBImage from "../components/VBImage";
+import AddEditVBImageForm from "../components/AddVBImageForm";
 
 const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 40px;
 `;
 
 const Wrapper = styled.div`
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
   text-align: left;
   background-color: #b2b1bf;
   opacity: 0.76;
-  width: 600px;
+  width: 1000px;
   margin-top: 15px;
   border-radius: 75px;
   padding: 45px;
@@ -36,9 +37,19 @@ const LinkWrapper = styled.div`
   margin-top: 30px;
 `;
 
+const ShowFormButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  font-size: 15px;
+  background-color: #b2b1bf;
+  opacity: 0.7;
+`;
+
 export default function VisionBoardDetails({ user }) {
   const [visionBoard, setVisionBoard] = useState({});
-  const [verifiedUser, setVerifiedUser] = useState(null);
+  const [visionBoardImages, setVisionBoardImages] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const { vbKey } = useParams();
 
   useEffect(() => {
@@ -47,23 +58,36 @@ export default function VisionBoardDetails({ user }) {
       getSingleVisionBoard(vbKey).then((res) => {
         setVisionBoard(res);
       });
+      getAllVisionBoardImagesByVBId(vbKey).then((res) => {
+        setVisionBoardImages(res);
+      });
     }
-    getUserByUid(user.uid).then(setVerifiedUser);
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [visionBoardImages]);
 
   return (
-    <Container>
+    <Container style={{ marginBottom: 40, marginTop: 40 }}>
       <Wrapper>
-        <h3 style={{ alignSelf: "center" }}>{visionBoard.title}</h3>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+        <h3 style={{ marginRight: 15 }}>{visionBoard.title}</h3>
+        <ShowFormButton className="submit-btn" onClick={() => setShowForm(true)}>+</ShowFormButton>
+        </div>
+        {showForm && <AddEditVBImageForm vbId={vbKey} setShowForm={setShowForm} />}
+        <div
+          style={{ marginBottom: 20, display: "flex", flexDirection: "row" }}
+        >
+          {visionBoardImages.map((vbImage) => (
+            <VBImage vbImage={vbImage} key={vbImage.id} />
+          ))}
+        </div>
         <LinkWrapper>
           <Link
             onClick={() =>
-              deleteVisionBoard(visionBoard.id, user.uid).then(() => {
-                getAllUserVisionBoardsByUid(user.uid);
-              })
+              deleteVisionBoard(visionBoard.id, user.uid).then(
+                getAllUserVisionBoardsByUid(user.uid)
+              )
             }
             to="/visionboards"
           >
@@ -79,7 +103,7 @@ export default function VisionBoardDetails({ user }) {
               </g>
             </svg>
           </Link>
-          <Link to={`/visionboardssedit/${visionBoard.id}`}>
+          <Link to={`/visionboardedit/${vbKey}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -115,5 +139,11 @@ VisionBoardDetails.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     userId: PropTypes.number,
+  }),
+  visionBoardImages: PropTypes.shape({
+    id: PropTypes.number,
+    src: PropTypes.string,
+    altText: PropTypes.string,
+    visionBoardId: PropTypes.number,
   }),
 };

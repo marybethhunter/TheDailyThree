@@ -11,6 +11,8 @@ import AddEditGoals from '../views/AddEditGoals';
 import AddEditGoalForm from "../components/AddEditGoalForm";
 import VisionBoards from "../views/VisionBoards";
 import VisionBoardDetails from "../views/VisionBoardDetails";
+import AddEditVisionBoard from "../views/AddEditVisionBoard";
+import AddEditVBForm from "../components/AddEditVBForm";
 export default function Routing({ user }) {
   return (
     <Routes>
@@ -29,6 +31,8 @@ export default function Routing({ user }) {
       <Route user={user} exact path="/goalsedit/:goalEditKey" element={<AddEditGoals user={user} />} />
       <Route user={user} exact path="/visionboards" element={<VisionBoards user={user} />} />
       <Route user={user} exact path="/visionboarddetails/:vbKey" element={<VisionBoardDetails user={user} />} />
+      <Route user={user} exact path="/visionboardedit/:vbEditKey" element={<AddEditVisionBoard user={user} />} />
+      <Route user={user} exact path="/visionboards/add" element={<AddEditVBForm user={user} />} />
     </Routes>
   );
 }

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import styled from "styled-components";
-import { addNewGoal, updateGoal } from "../data/goalData";
 import { getUserByUid } from "../data/userData";
+import { addNewVisionBoard, updateVisionBoard } from "../data/visionBoardData";
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +17,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: left;
+  align-items: center;
+  text-align: center;
   background-color: #b2b1bf;
   opacity: 0.7;
   width: 600px;
@@ -49,11 +50,9 @@ const ButtonStyle = styled(Button)`
 
 const initialState = {
   title: "",
-  description: "",
-  completed: false,
 };
 
-export default function AddEditGoalForm({ obj = {}, user }) {
+export default function AddEditVBForm({ obj = {}, user }) {
   const [formInput, setFormInput] = useState(initialState);
   const [verifiedUser, setVerifiedUser] = useState(null);
   const navigate = useNavigate();
@@ -62,8 +61,6 @@ export default function AddEditGoalForm({ obj = {}, user }) {
     if (obj.id) {
       setFormInput({
         title: obj.title,
-        description: obj.description,
-        completed: obj.completed,
       });
     }
     getUserByUid(user.uid).then(setVerifiedUser);
@@ -83,17 +80,17 @@ export default function AddEditGoalForm({ obj = {}, user }) {
   const handleClick = (e) => {
     e.preventDefault();
     if (obj.id) {
-      updateGoal(
+      updateVisionBoard(
         obj.id,
         { ...formInput, userId: verifiedUser.id, id: obj.id },
         user.uid
       ).then(() => {
-        navigate(`/goaldetails/${obj.id}`);
+        navigate(`/visionboarddetails/${obj.id}`);
       });
     } else {
-      addNewGoal({ ...formInput, userId: verifiedUser.id }).then(() => {
+      addNewVisionBoard({ ...formInput, userId: verifiedUser.id }).then(() => {
         resetForm();
-        navigate("/goals");
+        navigate("/visionboards");
       });
     }
   };
@@ -101,10 +98,7 @@ export default function AddEditGoalForm({ obj = {}, user }) {
   return (
     <Container>
       <Wrapper>
-        <h5>
-          Please complete the form with any goal you'd like to work towards
-          accomplishing :)
-        </h5>
+        <h5>Please name your vision board :)</h5>
         <Form onSubmit={handleClick}>
           <FormGroupStyle>
             <Label for="title"></Label>
@@ -114,19 +108,7 @@ export default function AddEditGoalForm({ obj = {}, user }) {
               type="text"
               name="title"
               id="title"
-              placeholder="Goal Title..."
-              required
-            />
-          </FormGroupStyle>
-          <FormGroupStyle>
-            <Label for="description"></Label>
-            <InputStyle
-              onChange={(e) => handleChange(e)}
-              value={formInput.description || ""}
-              type="textarea"
-              name="description"
-              id="description"
-              placeholder="Description of goal..."
+              placeholder="Vision Board Title..."
               required
             />
           </FormGroupStyle>
@@ -141,16 +123,14 @@ export default function AddEditGoalForm({ obj = {}, user }) {
   );
 }
 
-AddEditGoalForm.propTypes = {
+AddEditVBForm.propTypes = {
   obj: PropTypes.shape({
     id: PropTypes.number,
     title: PropTypes.string,
-    description: PropTypes.string,
-    completed: PropTypes.bool,
     userId: PropTypes.number,
   }),
 };
 
-AddEditGoalForm.defaultProps = {
+AddEditVBForm.defaultProps = {
   obj: {},
 };

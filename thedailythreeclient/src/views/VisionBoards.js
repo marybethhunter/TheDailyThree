@@ -45,7 +45,7 @@ export default function VisionBoards({ user }) {
       <h1 style={{ opacity: 0.6 }}>{user.fullName}'s Vision Boards</h1>
       <ButtonStyle
         className="submit-btn"
-        onClick={() => navigate("/visionboards/addvisionboard")}
+        onClick={() => navigate("/visionboards/add")}
       >
         +
       </ButtonStyle>

@@ -81,6 +81,7 @@ export default function AddEditVBImageForm({ vbId, setShowForm }) {
       visionBoardId: parseInt(vbId),
     }).then(() => {
       resetForm();
+      setShowForm(false);
     });
   };
 

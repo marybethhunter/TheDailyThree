@@ -70,16 +70,30 @@ export default function VisionBoardDetails({ user }) {
   return (
     <Container style={{ marginBottom: 40, marginTop: 40 }}>
       <Wrapper>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-        <h3 style={{ marginRight: 15 }}>{visionBoard.title}</h3>
-        <ShowFormButton className="submit-btn" onClick={() => setShowForm(true)}>+</ShowFormButton>
-        </div>
-        {showForm && <AddEditVBImageForm vbId={vbKey} setShowForm={setShowForm} />}
         <div
-          style={{ marginBottom: 20, display: "flex", flexDirection: "row" }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h3 style={{ marginRight: 15 }}>{visionBoard.title}</h3>
+          <ShowFormButton
+            className="submit-btn"
+            onClick={() => setShowForm(true)}
+          >
+            +
+          </ShowFormButton>
+        </div>
+        {showForm && (
+          <AddEditVBImageForm vbId={vbKey} setShowForm={setShowForm} />
+        )}
+        <div
+          style={{ marginBottom: 20, display: "flex", flexWrap: "wrap" }}
         >
           {visionBoardImages.map((vbImage) => (
-            <VBImage vbImage={vbImage} key={vbImage.id} />
+            <VBImage vbImage={vbImage} key={vbImage.id} user={user} />
           ))}
         </div>
         <LinkWrapper>

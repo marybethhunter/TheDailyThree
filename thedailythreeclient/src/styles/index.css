@@ -67,11 +67,11 @@ code {
   background: rgba(114, 114, 114, 0.571);
   border-radius: 100px;
   position: relative;
-  transition: background-color .2s;
+  transition: background-color 0.2s;
 }
 
 .react-switch-label .react-switch-button {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -92,24 +92,37 @@ code {
   width: 60px;
 }
 
-@media (any-hover:hover) {
+@media (any-hover: hover) {
   .vb-image:hover {
     animation: grow 1s ease-in-out 1 normal;
   }
 
   @keyframes grow {
     from {
-      transform: scale(1)
-    } to  {
-      transform: scale(1.1)
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
     }
   }
 
   @keyframes shrink {
     from {
-      transform: scale(1.1)
-    } to  {
-      transform: scale(1)
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
     }
   }
+}
+
+.svg-overlay-wrap {
+  position: relative;
+}
+
+.link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
 }

@@ -1,4 +1,4 @@
-# 🕯 TheDailyThree - E16 Final Full Stack Capstone!
+# ☁ TheDailyThree - E16 Final Full Stack Capstone!
 
 ## Get Started:
 

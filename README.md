@@ -16,6 +16,7 @@
 #### **Authenticated Users**:
 * Users can log into The Daily Three with their Google account and add a daily gratitude entry and mood. They can see a list of all of their past entries, as well as see the details of each past entry. Any entry can also be deleted.
 * Users can create, edit, view the details of, and delete custom goals. They can toggle the goal as completed or uncompleted as they make or do not make progress.
+* Users can create, edit, view the details of, and delete custom vision boards. They can also add images to their vision boards that they can delete individually.
 #### **Chart.js**: 
 * Users can access the Mood Tracker view and see a Chart.js doughnut graph of their moods. This can be used to see their baseline/most common mood and maybe even see it improve over time as the ‘happier’ moods increase in quantity.
 
@@ -78,5 +79,6 @@ useEffect(() => {
 ![2022-05-28 (2)](https://user-images.githubusercontent.com/86667443/170832260-ca2af8a2-69e3-447b-ba31-740c697fdd2e.png)
 ![2022-06-01](https://user-images.githubusercontent.com/86667443/171479527-afdb3f52-92d6-45bc-bc00-b1fff6389c6a.png)
 ![2022-06-01 (1)](https://user-images.githubusercontent.com/86667443/171479545-87fd9087-c87c-4332-996f-f41a92d39eca.png)
+![2022-06-14](https://user-images.githubusercontent.com/86667443/173705266-29156019-5ef5-4341-a0d1-7a3c975f773d.png)
 
 ## Contributors: Mary Beth Hunter, [Github](https://github.com/marybethhunter), [Portfolio](https://marybeth-hunter.com/), [LinkedIn](www.linkedin.com/in/marybhunter1)

@@ -20,7 +20,7 @@
 #### **Chart.js**: 
 * Users can access the Mood Tracker view and see a Chart.js doughnut graph of their moods. This can be used to see their baseline/most common mood and maybe even see it improve over time as the ‘happier’ moods increase in quantity.
 
-## Loom Walkthrough:
+## [Loom Walkthrough!](https://www.loom.com/share/2cb10de81aea4240b8f5b737825e85cc)
 
 ## Relevant Links:
 * [FigJam](https://www.figma.com/file/PJUBo3483VLoS8xX5NKurp/The-Daily-Three?node-id=0%3A1):
